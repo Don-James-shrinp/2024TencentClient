@@ -1,0 +1,52 @@
+## Android打包问题
+
+### 需要安装Android Studio
+
+- 最主要的是要安装`Android SDK Command-line Tool`
+- 然后执行虚幻引擎安装位置`Engine\Extras\Android\SetupAndroid.bat`
+- 上述脚本会安装打包需要的jdk以及ndk
+
+### Gradle下载问题
+
+- 在打包的最终阶段，会遇到要安装gradle，但是下载失败的问题
+- 解决方法是自行下载压缩包，然后将压缩包放置在`C:/User/Username/.gradle/wrapper/dist/gradle版本/乱码/`
+
+### Java版本问题
+
+```
+Could not open settings generic class cache for settings file 'Z:\settings.gradle' (C:\Users\OriginOvO\.gradle\caches\7.5\scripts\356clt8w0kvd14538qat92yfl).
+```
+
+- 网上找到了相关的报错[**Could not open settings generic class cache for settings file ‘Z:\settings.gradle’**](https://forums.unrealengine.com/t/could-not-open-settings-generic-class-cache-for-settings-file-z-settings-gradle/1603860)
+- 解决方法是下载java18
+- gradle和jdk的版本对应[gradle和jdk版本对应关系](https://www.cnblogs.com/zhangzaizz/p/18120393)
+
+### 代理配置问题
+
+```
+UATHelper: Packaging (Android (ASTC)): A problem occurred configuring root project 'app'.
+UATHelper: Packaging (Android (ASTC)): > Could not resolve all files for configuration ':classpath'.
+UATHelper: Packaging (Android (ASTC)):    > Could not resolve com.android.tools.build:gradle:7.4.2.
+UATHelper: Packaging (Android (ASTC)):      Required by:
+UATHelper: Packaging (Android (ASTC)):          project :
+UATHelper: Packaging (Android (ASTC)):       > Could not resolve com.android.tools.build:gradle:7.4.2.
+UATHelper: Packaging (Android (ASTC)):          > Could not get resource 'https://dl.google.com/dl/android/maven2/com/android/tools/build/gradle/7.4.2/gradle-7.4.2.pom'.
+UATHelper: Packaging (Android (ASTC)):             > Could not GET 'https://dl.google.com/dl/android/maven2/com/android/tools/build/gradle/7.4.2/gradle-7.4.2.pom'.
+UATHelper: Packaging (Android (ASTC)):                > Connect to 127.0.0.1:7890 [/127.0.0.1] failed: Connection refused: no further information
+UATHelper: Packaging (Android (ASTC)):       > Could not resolve com.android.tools.build:gradle:7.4.2.
+UATHelper: Packaging (Android (ASTC)):          > Could not get resource 'https://repo.maven.apache.org/maven2/com/android/tools/build/gradle/7.4.2/gradle-7.4.2.pom'.
+UATHelper: Packaging (Android (ASTC)):             > Could not GET 'https://repo.maven.apache.org/maven2/com/android/tools/build/gradle/7.4.2/gradle-7.4.2.pom'.
+UATHelper: Packaging (Android (ASTC)):                > Connect to 127.0.0.1:7890 [/127.0.0.1] failed: Connection refused: no further information
+```
+
+- 从上述日志信息中可以看出，程序试图通过`127.0.0.1:7890`代理来下载对应文件
+- 发现这是由于默认的代理配置错误导致的，在`C:/User/Username/.gradle/gradle.properties`中将代理配置成本机的代理所在的端口即可
+
+### No Google Play Store Key
+
+- 打包完成，在手机端运行程序时，出现上述报错
+- 在`Project Settings > Platforms > Android > Package game data inside .apk`，将此选项勾选
+- 然后将`Intermediate/Android/`中除了`arm64`的其他文件删除，然后重启UE
+- 重新打包项目
+
+- 打包完成后，会发现安装包比之前的大了一倍
