@@ -17,12 +17,12 @@
 
 - 编译后结果如下
 
-  <img src="E:\gamedev\TencentClient2024\Images\Assignment1\CompileResult.png" width="50%">
+  <img src="..\Images\Assignment1\CompileResult.png" width="50%">
 
 ### 安装包构建
 
 - 构建安卓安装包，结果如下
 
-  <img src="E:\gamedev\TencentClient2024\Images\Assignment1\AndroidBuildResult.jpg" width="70%">
+  <img src="..\Images\Assignment1\AndroidBuildResult.jpg" width="70%">
 
 - 遇到的问题及解决方案见[TroubleShoot](../Notes/TroubleShoot.md#Android打包问题)
