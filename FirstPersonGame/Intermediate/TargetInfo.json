@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "FirstPersonGame",
+			"Path": "..\\Source\\FirstPersonGame.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "FirstPersonGameEditor",
+			"Path": "..\\Source\\FirstPersonGameEditor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}

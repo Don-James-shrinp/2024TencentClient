@@ -1,0 +1,15 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "e:\\gamedev\\tencentclient2024\\firstpersongame\\intermediate\\build\\win64\\unrealeditor\\inc\\firstpersongame\\uht\\firstpersongameplayercontroller.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "e:\\gamedev\\unrealengine-5.4.4-release\\engine\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\unrealed\\sharedpch.unrealed.project.nonoptimized.valapi.cpp20.h.pch",
+        "Includes": [
+            "e:\\gamedev\\tencentclient2024\\firstpersongame\\intermediate\\build\\win64\\x64\\unrealeditor\\debuggame\\firstpersongame\\definitions.firstpersongame.h",
+            "e:\\gamedev\\tencentclient2024\\firstpersongame\\source\\firstpersongame\\firstpersongameplayercontroller.h",
+            "e:\\gamedev\\tencentclient2024\\firstpersongame\\intermediate\\build\\win64\\unrealeditor\\inc\\firstpersongame\\uht\\firstpersongameplayercontroller.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

@@ -1,0 +1,11 @@
+{
+	"RemapUnityFiles": 
+	{
+		"Module.CableComponent.cpp.obj": [
+			"CableActor.cpp.obj",
+			"CableComponent.cpp.obj",
+			"CableComponentPlugin.cpp.obj",
+			"CableComponent.init.gen.cpp.obj"
+		]
+	}
+}

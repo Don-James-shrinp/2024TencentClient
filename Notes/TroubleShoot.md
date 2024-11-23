@@ -50,3 +50,26 @@ UATHelper: Packaging (Android (ASTC)):                > Connect to 127.0.0.1:789
 - 重新打包项目
 
 - 打包完成后，会发现安装包比之前的大了一倍
+
+
+## UE5 C++项目构建配置
+
+[参考官方文档](https://dev.epicgames.com/documentation/zh-cn/unreal-engine/compiling-game-projects-in-unreal-engine-using-cplusplus)
+
+**Development (开发模式)**
+
+- **用途**：这是最常用的模式，用于日常开发和调试。
+- **特点**：优化程度适中，带有调试符号，运行速度快于 Debug，但比 Shipping 慢。
+- **适合**：日常开发、调试 C++ 代码、运行编辑器模式。
+
+**Debug (调试模式)**
+
+- **用途**：用于深度调试代码或解决复杂问题。
+- **特点**：未优化，包含完整的调试符号，运行速度较慢，但方便调试。
+- **适合**：需要调试低级错误或特定模块时。
+
+**Shipping (发行模式)**
+
+- **用途**：用于发布最终产品（游戏、应用）。
+- **特点**：完全优化，移除所有调试符号，目标是提供最佳性能。
+- **适合**：最终的产品构建。
