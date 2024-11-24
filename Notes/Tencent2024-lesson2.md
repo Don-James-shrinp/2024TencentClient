@@ -42,8 +42,8 @@
 
   LevelStreaming流式异步加载
 
-  1. WorldPartition
-  2. WorldComposition
+  1. WorldPartition（UE5）
+  2. WorldComposition（UE4）
   3. LoadByLogic：有程序逻辑来加载，比如触发某个条件才能加载
 
 - **关卡大小和加载距离**
@@ -188,9 +188,12 @@
     3. 附加题
        1. 利用UMG制作结算UI代替日志打印
        2. 支持多人联机（修复FPP模板缺陷）
-
 - Q&A
   - 将属性外显到Panel设置
     - UPROPERPTY(EditAnyWhere, BlueprintReadOnly, Category=Input)
   - UE学习
     - 知乎源码分析文章
+  - 数据应该存在哪
+    - 应该尽量避免过多同步，比如说玩家较多时，在多个玩家进行同步开销很大
+
+​	

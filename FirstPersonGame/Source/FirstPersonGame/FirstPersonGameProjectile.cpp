@@ -3,7 +3,8 @@
 #include "FirstPersonGameProjectile.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Components/SphereComponent.h"
-
+#include "FirstPersonGameStateBase.h"
+#include "TargetCube.h"
 AFirstPersonGameProjectile::AFirstPersonGameProjectile() 
 {
 	// Use a sphere as a simple collision representation
@@ -37,7 +38,11 @@ void AFirstPersonGameProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* Oth
 	if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr) && OtherComp->IsSimulatingPhysics())
 	{
 		OtherComp->AddImpulseAtLocation(GetVelocity() * 100.0f, GetActorLocation());
-
+		ATargetCube* targetCube = Cast<ATargetCube>(OtherActor);
+		if (targetCube)
+		{
+			 
+		}
 		Destroy();
 	}
 }

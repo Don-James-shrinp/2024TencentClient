@@ -73,3 +73,47 @@ UATHelper: Packaging (Android (ASTC)):                > Connect to 127.0.0.1:789
 - **用途**：用于发布最终产品（游戏、应用）。
 - **特点**：完全优化，移除所有调试符号，目标是提供最佳性能。
 - **适合**：最终的产品构建。
+
+## C++与蓝图如何关联起来
+
+### 1. 在C++中创建蓝图中可以调用的函数
+
+使用`UFUNCTION(BlueprintCallable)`宏标记C++函数，使其可以在蓝图中被调用
+
+```c++
+UFUNCTION(BlueprintCallable, Category="MyCategory")
+void MyFunction();
+```
+
+### 2. 在C++中创建蓝图事件
+
+用`UFUNCTION(BlueprintImplementableEvent)`使其可以在蓝图中实现
+
+```c++
+UFUNCTION(BlueprintImplementableEvent, Category="MyCategory")
+void MyBlueprintEvent();
+  
+```
+
+### 3. 在C++中创建蓝图可重写事件
+
+使用`UFUNCTION(BlueprintNativeEvent)`宏标记 C++ 函数，使其可以在蓝图中重写，同时提供一个 C++ 默认实现。
+
+```c++
+UFUNCTION(BlueprintNativeEvent, Category="MyCategory")
+void MyNativeEvent();
+void MyNativeEvent_Implementation();
+```
+
+### 4. 在C++中创建蓝图可编辑的变量
+
+使用`UPROPERTY(EditAnywhere, BlueprintReadWrite)`宏标记 C++ 变量，使其可以在蓝图中编辑和读取。注意这样的成员变量的访问权限只能为`public`
+
+```c++
+UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="MyCategory")
+int32 MyVariable;
+```
+
+### 5. 在蓝图中使用C++类
+
+创建基于C++类的蓝图

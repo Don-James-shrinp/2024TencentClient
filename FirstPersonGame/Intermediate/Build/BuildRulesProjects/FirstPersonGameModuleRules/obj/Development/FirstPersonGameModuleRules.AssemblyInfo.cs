@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FirstPersonGameModuleRules")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Development")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f2a3c1cb84113d052fd6712fc90ba7e60f126fa7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3d8adccf2f04494b4e5f1bea148259ceccd73ac0")]
 [assembly: System.Reflection.AssemblyProductAttribute("FirstPersonGameModuleRules")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FirstPersonGameModuleRules")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
