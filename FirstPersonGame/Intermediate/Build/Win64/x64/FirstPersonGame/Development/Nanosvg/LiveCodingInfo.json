@@ -1,8 +1,0 @@
-{
-	"RemapUnityFiles": 
-	{
-		"Module.Nanosvg.cpp.obj": [
-			"nanosvg_implementation.cpp.obj"
-		]
-	}
-}

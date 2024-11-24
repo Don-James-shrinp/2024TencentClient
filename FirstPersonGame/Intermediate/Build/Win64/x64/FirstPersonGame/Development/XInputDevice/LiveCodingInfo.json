@@ -1,9 +1,0 @@
-{
-	"RemapUnityFiles": 
-	{
-		"Module.XInputDevice.cpp.obj": [
-			"XInputDeviceModule.cpp.obj",
-			"XInputInterface.cpp.obj"
-		]
-	}
-}

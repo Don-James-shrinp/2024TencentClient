@@ -1,8 +1,0 @@
-{
-	"RemapUnityFiles": 
-	{
-		"Module.ExampleDeviceProfileSelector.cpp.obj": [
-			"ExampleDeviceProfileSelectorModule.cpp.obj"
-		]
-	}
-}

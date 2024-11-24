@@ -1,8 +1,0 @@
-{
-	"RemapUnityFiles": 
-	{
-		"Module.VorbisAudioDecoder.cpp.obj": [
-			"VorbisAudioInfo.cpp.obj"
-		]
-	}
-}

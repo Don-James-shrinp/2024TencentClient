@@ -1,8 +1,0 @@
-{
-	"RemapUnityFiles": 
-	{
-		"Module.BuildSettings.cpp.obj": [
-			"BuildSettings.cpp.obj"
-		]
-	}
-}

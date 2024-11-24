@@ -1,8 +1,0 @@
-{
-	"RemapUnityFiles": 
-	{
-		"Module.RadAudioDecoder.cpp.obj": [
-			"RadAudioInfo.cpp.obj"
-		]
-	}
-}

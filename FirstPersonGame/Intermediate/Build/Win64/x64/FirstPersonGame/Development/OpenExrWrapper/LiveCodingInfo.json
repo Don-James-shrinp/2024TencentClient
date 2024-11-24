@@ -1,9 +1,0 @@
-{
-	"RemapUnityFiles": 
-	{
-		"Module.OpenExrWrapper.cpp.obj": [
-			"OpenExrWrapper.cpp.obj",
-			"OpenExrWrapperContextReader.cpp.obj"
-		]
-	}
-}

@@ -1,8 +1,0 @@
-{
-	"RemapUnityFiles": 
-	{
-		"Module.NetCommon.cpp.obj": [
-			"NetCommonModule.cpp.obj"
-		]
-	}
-}

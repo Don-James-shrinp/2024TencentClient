@@ -1,8 +1,0 @@
-{
-	"RemapUnityFiles": 
-	{
-		"Module.StreamingPauseRendering.cpp.obj": [
-			"StreamingPauseRendering.cpp.obj"
-		]
-	}
-}

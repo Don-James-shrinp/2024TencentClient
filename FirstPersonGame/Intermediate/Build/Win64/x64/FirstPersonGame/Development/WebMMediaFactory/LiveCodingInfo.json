@@ -1,8 +1,0 @@
-{
-	"RemapUnityFiles": 
-	{
-		"Module.WebMMediaFactory.cpp.obj": [
-			"WebMMediaFactoryModule.cpp.obj"
-		]
-	}
-}

@@ -1,9 +1,0 @@
-{
-	"RemapUnityFiles": 
-	{
-		"Module.SlateNullRenderer.cpp.obj": [
-			"SlateNullRenderer.cpp.obj",
-			"SlateNullRendererModule.cpp.obj"
-		]
-	}
-}

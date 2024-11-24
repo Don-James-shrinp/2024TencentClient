@@ -1,8 +1,0 @@
-{
-	"SourceFiles": [
-		"E:\\gamedev\\TencentClient2024\\FirstPersonGame\\Source\\FirstPersonGame\\FirstPersonGame.Build.cs",
-		"E:\\gamedev\\TencentClient2024\\FirstPersonGame\\Source\\FirstPersonGame.Target.cs",
-		"E:\\gamedev\\TencentClient2024\\FirstPersonGame\\Source\\FirstPersonGameEditor.Target.cs"
-	],
-	"EngineVersion": "5.4.4"
-}

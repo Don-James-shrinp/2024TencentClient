@@ -1,9 +1,0 @@
-{
-	"RemapUnityFiles": 
-	{
-		"Module.HttpReplayStreaming.cpp.obj": [
-			"HttpNetworkReplayStreaming.cpp.obj",
-			"HttpNetworkReplayStreaming.init.gen.cpp.obj"
-		]
-	}
-}

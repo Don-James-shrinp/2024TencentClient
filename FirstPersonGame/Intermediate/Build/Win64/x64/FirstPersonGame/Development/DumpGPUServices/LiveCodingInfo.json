@@ -1,9 +1,0 @@
-{
-	"RemapUnityFiles": 
-	{
-		"Module.DumpGPUServices.cpp.obj": [
-			"DumpGPUHTTPUploadServices.cpp.obj",
-			"DumpGPUServices.cpp.obj"
-		]
-	}
-}

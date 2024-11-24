@@ -1,9 +1,0 @@
-{
-	"RemapUnityFiles": 
-	{
-		"Module.AudioCaptureCore.cpp.obj": [
-			"AudioCaptureCore.cpp.obj",
-			"AudioCaptureCoreModule.cpp.obj"
-		]
-	}
-}

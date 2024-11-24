@@ -1,8 +1,0 @@
-{
-	"RemapUnityFiles": 
-	{
-		"Module.NetworkFile.cpp.obj": [
-			"NetworkPlatformFile.cpp.obj"
-		]
-	}
-}

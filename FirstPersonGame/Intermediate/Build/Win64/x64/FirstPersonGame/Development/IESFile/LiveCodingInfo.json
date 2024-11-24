@@ -1,8 +1,0 @@
-{
-	"RemapUnityFiles": 
-	{
-		"Module.IESFile.cpp.obj": [
-			"IESLoader.cpp.obj"
-		]
-	}
-}

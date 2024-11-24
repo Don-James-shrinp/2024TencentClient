@@ -1,8 +1,0 @@
-{
-	"RemapUnityFiles": 
-	{
-		"Module.InputDevice.cpp.obj": [
-			"InputDeviceModule.cpp.obj"
-		]
-	}
-}
