@@ -16,5 +16,6 @@
 
 - 在UE5中GameMode和GameState都用了单例模式，即只有一个实例，用于存储一些全局的信息
 - 我个人的理解来看（可能不太准确），GameMode用于存储静态的游戏信息（比如配置信息，游戏对象，控制器）；而GameState用于存储动态的游戏信息
+- GameMode指定游戏的规则，比如终止的条件；GameMode通过GameState来获取当前的游戏状态信息
 - 从网络同步角度来看，GameMode仅存在服务器上，因此如果要在客户端进行同步的信息，最好存在GameState上
 - 因此对于此作业而言，配置信息`x`、`y`、`N`、`T`存储在GameMode上；当前的得分、游戏对局剩余时间存储在GameState上
