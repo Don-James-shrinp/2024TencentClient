@@ -19,6 +19,7 @@
 - GameMode指定游戏的规则，比如终止的条件；GameMode通过GameState来获取当前的游戏状态信息
 - 从网络同步角度来看，GameMode仅存在服务器上，因此如果要在客户端进行同步的信息，最好存在GameState上
 - 因此对于此作业而言，配置信息`x`、`y`、`N`、`T`存储在GameMode上；当前的得分、游戏对局剩余时间存储在GameState上
+- GameState的类配置在GameMode中进行，可以在构造函数进行配置，也可以在蓝图中进行配置
 
 ### 计时效果实现
 
@@ -80,3 +81,30 @@
 - 测试结果如下
 
   <img src="../Images/Assignment2/HitCubeDetection.png">
+
+- 通过进一步添加记分逻辑即可实现得分统计，完整代码如下
+
+  ```c++
+  void AFirstPersonGameProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
+  {
+  	// Only add impulse and destroy projectile if we hit a physics
+  	if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr) && OtherComp->IsSimulatingPhysics())
+  	{
+  		OtherComp->AddImpulseAtLocation(GetVelocity() * 100.0f, GetActorLocation());
+  		ATargetCube* targetCube = Cast<ATargetCube>(OtherActor);
+  		if (targetCube)
+  		{
+  			auto currentGameState = GetWorld()->GetGameState<AFirstGameStateBase>();
+  			if (currentGameState)
+  			{
+  				int32 currentScore = currentGameState->GetTotalScore();
+  				currentGameState->SetTotalScore(currentScore + targetCube->Points);
+  			}
+  			targetCube->OnHit();
+  		}
+  		Destroy();
+  	}
+  }
+  ```
+
+  

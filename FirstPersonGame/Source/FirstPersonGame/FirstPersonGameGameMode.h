@@ -26,9 +26,6 @@ private:
 	float GameDuration;  //  一局游戏持续的时间T
 
 	UPROPERTY(EditAnywhere, Category = "Game Rules")
-	int32 PointPerHit;  //  每次击中获得的分数X
-
-	UPROPERTY(EditAnywhere, Category = "Game Rules")
 	int32 BonusMagnification;  //  重要物体的倍率
 
 	bool isEnd;  //  是否结束游戏

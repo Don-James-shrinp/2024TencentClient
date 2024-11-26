@@ -3,7 +3,7 @@
 #include "FirstPersonGameProjectile.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Components/SphereComponent.h"
-#include "FirstPersonGameStateBase.h"
+#include "FirstGameStateBase.h"
 #include "TargetCube.h"
 AFirstPersonGameProjectile::AFirstPersonGameProjectile() 
 {
@@ -41,7 +41,14 @@ void AFirstPersonGameProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* Oth
 		ATargetCube* targetCube = Cast<ATargetCube>(OtherActor);
 		if (targetCube)
 		{
-			UE_LOG(LogTemp, Error, TEXT("HIT The Cube!!!!"));
+			auto currentGameState = GetWorld()->GetGameState<AFirstGameStateBase>();
+			if (currentGameState)
+			{
+				int32 currentScore = currentGameState->GetTotalScore();
+				UE_LOG(LogTemp, Error, TEXT("score: %d"), targetCube->Points);
+				currentGameState->SetTotalScore(currentScore + targetCube->Points);
+			}
+			targetCube->OnHit();
 		}
 		Destroy();
 	}

@@ -22,10 +22,10 @@ public:
 	void OnHit();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Target")
-	int32 Points;
+	int32 Points;  //  每次被击中获得的分数
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Target")
-	float ScaleFactor;
+	float ScaleFactor;  //  每次被击中缩放的比例
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Target")
 	bool bIsImportantTarget;
