@@ -5,7 +5,8 @@
 #include "UObject/ConstructorHelpers.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetSystemLibrary.h"
-
+#include "FirstGameStateBase.h"
+#include "FirstGameStateBase.h"
 AFirstPersonGameGameMode::AFirstPersonGameGameMode()
 	: Super()
 {
@@ -13,11 +14,11 @@ AFirstPersonGameGameMode::AFirstPersonGameGameMode()
 	// set default pawn class to our Blueprinted character
 	static ConstructorHelpers::FClassFinder<APawn> PlayerPawnClassFinder(TEXT("/Game/FirstPerson/Blueprints/BP_FirstPersonCharacter"));
 	DefaultPawnClass = PlayerPawnClassFinder.Class;
+	GameStateClass = AFirstGameStateBase::StaticClass();
 	ImportantTargetCount = 5;
 	GameDuration = 10.0f;
 	PointPerHit = 10;
 	BonusMagnification = 2;
-	RemainingTime = GameDuration;
 	isEnd = false;
 }
 
@@ -36,20 +37,22 @@ void AFirstPersonGameGameMode::BeginPlay()
 void AFirstPersonGameGameMode::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	RemainingTime -= DeltaTime;
-	if (RemainingTime <= 0 && !isEnd)
+	auto currentGameState = GetWorld()->GetGameState<AFirstGameStateBase>();
+	if (currentGameState)
 	{
-		isEnd = true;
-		EndGame();
+		float currentTime = currentGameState->GetTimePassed();
+		currentGameState->SetTimePassed(currentTime + DeltaTime);
+		if (currentGameState->GetTimePassed() >= GameDuration && !isEnd)
+		{
+			isEnd = true;
+			EndGame();
+		}
 	}
-	//UE_LOG(LogTemp, Warning, TEXT("Remaining Time: %f"), RemainingTime);
 }
 
 void AFirstPersonGameGameMode::EndGame()
 {
 	UE_LOG(LogTemp, Warning, TEXT("EndGame"));
-	//GetWorld()->GetTimerManager().ClearAllTimersForObject(this);
-	// Get the player controller
 	APlayerController* PlayerController = UGameplayStatics::GetPlayerController(GetWorld(), 0);
 	if (PlayerController)
 	{

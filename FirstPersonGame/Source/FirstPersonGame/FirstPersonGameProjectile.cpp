@@ -41,7 +41,7 @@ void AFirstPersonGameProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* Oth
 		ATargetCube* targetCube = Cast<ATargetCube>(OtherActor);
 		if (targetCube)
 		{
-			 
+			UE_LOG(LogTemp, Error, TEXT("HIT The Cube!!!!"));
 		}
 		Destroy();
 	}

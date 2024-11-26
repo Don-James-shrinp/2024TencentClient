@@ -1,3 +1,5 @@
+# TroubleShoot
+
 ## Android打包问题
 
 ### 需要安装Android Studio
@@ -117,3 +119,21 @@ int32 MyVariable;
 ### 5. 在蓝图中使用C++类
 
 创建基于C++类的蓝图
+
+## GameState类实例化问题
+
+- GameState类的实例化由GameMode来进行管理
+
+- 在C++中通过在构造函数中设置GameState类来绑定对应GameState类的实例化
+
+  ```c++
+  AFirstPersonGameGameMode::AFirstPersonGameGameMode()
+  	: Super()
+  {
+  	GameStateClass = AFirstGameStateBase::StaticClass();
+  }
+  ```
+
+- 或者在蓝图中进行设置
+
+  <img src="../Images/Assignment2/SetGameStateForGameMode.png">

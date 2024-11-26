@@ -19,3 +19,64 @@
 - GameMode指定游戏的规则，比如终止的条件；GameMode通过GameState来获取当前的游戏状态信息
 - 从网络同步角度来看，GameMode仅存在服务器上，因此如果要在客户端进行同步的信息，最好存在GameState上
 - 因此对于此作业而言，配置信息`x`、`y`、`N`、`T`存储在GameMode上；当前的得分、游戏对局剩余时间存储在GameState上
+
+### 计时效果实现
+
+- 根据GameMode中配置的游戏对局时长，每个Tick对该变量减去DeltaTime，如果此变量小于等于0就说明对局结束，调用`SetPause`函数来使游戏暂停
+
+- Tick函数如下
+
+  ```c++
+  void AFirstPersonGameGameMode::Tick(float DeltaTime)
+  {
+  	Super::Tick(DeltaTime);
+  	RemainingTime -= DeltaTime;
+  	if (RemainingTime <= 0 && !isEnd)
+  	{
+  		isEnd = true;
+  		EndGame();
+  	}
+  	//UE_LOG(LogTemp, Warning, TEXT("Remaining Time: %f"), RemainingTime);
+  }
+  ```
+
+- `EndGame`函数如下
+
+  ```c++
+  void AFirstPersonGameGameMode::EndGame()
+  {
+  	UE_LOG(LogTemp, Warning, TEXT("EndGame"));
+  	APlayerController* PlayerController = UGameplayStatics::GetPlayerController(GetWorld(), 0);
+  	if (PlayerController)
+  	{
+  		UE_LOG(LogTemp, Warning, TEXT("PAUSE"));
+  		isEnd = true;
+  		SetPause(PlayerController);
+  	}
+  }
+  ```
+
+### 子弹碰撞方块检测实现
+
+- 创建继承于`AActor`的类`ATargetCube`用于实现方块的逻辑，基于此类创建蓝图，并添加网格和材质
+
+- 在`Projectile`类的`OnHit`函数中进行实现，检查撞击到的Actor是否为`TargeCube`类型
+
+- 通过`Cast`函数将`AActor`转化为`ATargetCube`，检查转换后的指针是否为空，若非空，说明撞击到了目标方块
+
+  ```c++
+  if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr) && OtherComp->IsSimulatingPhysics())
+  {
+  	OtherComp->AddImpulseAtLocation(GetVelocity() * 100.0f, GetActorLocation());
+  	ATargetCube* targetCube = Cast<ATargetCube>(OtherActor);
+  	if (targetCube)
+  	{
+  		UE_LOG(LogTemp, Error, TEXT("HIT The Cube!!!!"));
+  	}
+  	Destroy();
+  }
+  ```
+
+- 测试结果如下
+
+  <img src="../Images/Assignment2/HitCubeDetection.png">
