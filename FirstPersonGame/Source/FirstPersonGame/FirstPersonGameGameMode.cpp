@@ -9,7 +9,7 @@
 AFirstPersonGameGameMode::AFirstPersonGameGameMode()
 	: Super()
 {
-	UE_LOG(LogTemp, Log, TEXT("Initialize Game Mode Class"));
+	//UE_LOG(LogTemp, Log, TEXT("Initialize Game Mode Class"));
 	// set default pawn class to our Blueprinted character
 	static ConstructorHelpers::FClassFinder<APawn> PlayerPawnClassFinder(TEXT("/Game/FirstPerson/Blueprints/BP_FirstPersonCharacter"));
 	DefaultPawnClass = PlayerPawnClassFinder.Class;
@@ -17,12 +17,19 @@ AFirstPersonGameGameMode::AFirstPersonGameGameMode()
 	ImportantTargetCount = 5;
 	GameDuration = 10.0f;
 	BonusMagnification = 2;
+	PointsPerHit = 2;
+	ScaleFactor = 0.2f;
 	isEnd = false;
 }
 
-float AFirstPersonGameGameMode::GetGameDuration()
+int32 AFirstPersonGameGameMode::GetPointsPerHit()
 {
-	return GameDuration;
+	return PointsPerHit;
+}
+
+float AFirstPersonGameGameMode::GetScaleFactor()
+{
+	return ScaleFactor;
 }
 
 void AFirstPersonGameGameMode::BeginPlay()

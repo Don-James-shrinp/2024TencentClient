@@ -5,6 +5,9 @@
 #include "Components/SphereComponent.h"
 #include "FirstGameStateBase.h"
 #include "TargetCube.h"
+#include "FirstPersonGameGameMode.h"
+#include <Kismet/GameplayStatics.h>
+
 AFirstPersonGameProjectile::AFirstPersonGameProjectile() 
 {
 	// Use a sphere as a simple collision representation
@@ -42,13 +45,13 @@ void AFirstPersonGameProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* Oth
 		if (targetCube)
 		{
 			auto currentGameState = GetWorld()->GetGameState<AFirstGameStateBase>();
-			if (currentGameState)
+			auto myGameMode = Cast<AFirstPersonGameGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
+			if (myGameMode && currentGameState)
 			{
 				int32 currentScore = currentGameState->GetTotalScore();
-				UE_LOG(LogTemp, Error, TEXT("score: %d"), targetCube->Points);
-				currentGameState->SetTotalScore(currentScore + targetCube->Points);
+				currentGameState->SetTotalScore(currentScore + myGameMode->GetPointsPerHit());
+				targetCube->OnHit(myGameMode->GetScaleFactor());
 			}
-			targetCube->OnHit();
 		}
 		Destroy();
 	}

@@ -9,8 +9,6 @@ ATargetCube::ATargetCube()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	Points = 2;
-	ScaleFactor = 0.5f;
 }
 
 // Called when the game starts or when spawned
@@ -27,7 +25,7 @@ void ATargetCube::Tick(float DeltaTime)
 
 }
 
-void ATargetCube::OnHit()
+void ATargetCube::OnHit(float ScaleFactor)
 {
 	if (bIsHitOnce)
 	{
@@ -36,7 +34,18 @@ void ATargetCube::OnHit()
 	else
 	{
 		bIsHitOnce = true;
-		SetActorScale3D(GetActorScale3D() * ScaleFactor);
+		SetActorScale3D(FVector(ScaleFactor));
+		GetRootComponent()->UpdateComponentToWorld();
 	}
+}
+
+bool ATargetCube::GetIsImportantTarget()
+{
+	return false;
+}
+
+void ATargetCube::SetIsImportantTarget(bool NewValue)
+{
+	bIsImportantTarget = NewValue;
 }
 

@@ -137,3 +137,15 @@ int32 MyVariable;
 - 或者在蓝图中进行设置
 
   <img src="../Images/Assignment2/SetGameStateForGameMode.png">
+
+## GameState默认不会调用Tick
+
+- 在更新状态信息时，想通过重写Tick函数在每一帧更新状态信息（比如得分信息、对局剩余时间信息）
+
+- 但是发现无法成功更新信息，然后查看了父类`AGameStateBase`的代码，发现该类是继承自`AInfo`，而`AInfo`中有这样一行代码，禁用了Tick函数，因此其子类若没有更新该设置的话，就默认不会调用Tick函数
+
+  ```c++
+  PrimaryActorTick.bCanEverTick = false;
+  ```
+
+- 因此，若想使其能够调用Tick，应该将其设置为`true`

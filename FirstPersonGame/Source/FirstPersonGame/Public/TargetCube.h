@@ -19,17 +19,11 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	UFUNCTION(BlueprintCallable)
-	void OnHit();
+	void OnHit(float ScaleFactor);
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Target")
-	int32 Points;  //  每次被击中获得的分数
+	bool GetIsImportantTarget();
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Target")
-	float ScaleFactor;  //  每次被击中缩放的比例
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Target")
-	bool bIsImportantTarget;
-
+	void SetIsImportantTarget(bool NewValue);
 
 protected:
 	// Called when the game starts or when spawned
@@ -37,5 +31,5 @@ protected:
 
 private:
 	bool bIsHitOnce;  //  是否已经被击中一次
-	
+	bool bIsImportantTarget;  //  是否是重要物体
 };

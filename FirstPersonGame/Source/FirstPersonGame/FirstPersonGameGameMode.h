@@ -13,7 +13,10 @@ class AFirstPersonGameGameMode : public AGameModeBase
 
 public:
 	AFirstPersonGameGameMode();
-	float GetGameDuration();
+	int32 GetPointsPerHit();
+
+	float GetScaleFactor();
+
 protected:
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
@@ -28,8 +31,16 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Game Rules")
 	int32 BonusMagnification;  //  重要物体的倍率
 
+	UPROPERTY(EditAnywhere, Category = "Game Rules")
+	int32 PointsPerHit;  //  每次击中的得分x
+
+	UPROPERTY(EditAnywhere, Category = "Game Rules")
+	float ScaleFactor;  //  被击中后的缩放比例y
+
+	UPROPERTY(EditAnywhere, Category = "Game Rules")
+	TArray<AActor*> TargetCubes;  //  存储场景中的方块
+
 	bool isEnd;  //  是否结束游戏
-	TArray<AActor*> TargetCubes;
 
 	void EndGame();
 
