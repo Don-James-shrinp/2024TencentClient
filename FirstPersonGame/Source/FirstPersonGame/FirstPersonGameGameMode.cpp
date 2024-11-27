@@ -6,6 +6,9 @@
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "FirstGameStateBase.h"
+#include "TargetCube.h"
+#include "Algo/RandomShuffle.h"
+
 AFirstPersonGameGameMode::AFirstPersonGameGameMode()
 	: Super()
 {
@@ -30,6 +33,11 @@ int32 AFirstPersonGameGameMode::GetPointsPerHit()
 float AFirstPersonGameGameMode::GetScaleFactor()
 {
 	return ScaleFactor;
+}
+
+int32 AFirstPersonGameGameMode::GetBonusMagnification()
+{
+	return BonusMagnification;
 }
 
 void AFirstPersonGameGameMode::BeginPlay()
@@ -72,5 +80,31 @@ void AFirstPersonGameGameMode::EndGame()
 			FColor::Blue,
 			Message
 		);
+	}
+}
+
+void AFirstPersonGameGameMode::InitializeItems()
+{
+	TArray<AActor*> FoundActors;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ATargetCube::StaticClass(), FoundActors);
+	if (FoundActors.Num() == 0)
+	{
+		UE_LOG(LogTemp, Error, TEXT("No TargetCube Found in Scene"));
+		return;
+	}
+	Algo::RandomShuffle(FoundActors);
+	uint32 NumToSelect = FMath::Min(FoundActors.Num(), ImportantTargetCount);
+	for (uint32 index = 0; index < NumToSelect; ++index)
+	{
+		ATargetCube* targetCube = Cast<ATargetCube>(FoundActors[index]);
+		if (targetCube)
+		{
+			targetCube->SetIsImportantTarget(true);
+			UE_LOG(LogTemp, Log, TEXT("Marked TargetCube %s as important."), *targetCube->GetName());
+		}
+		else
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Failed to cast actor to ATargetCube."));
+		}
 	}
 }

@@ -9,6 +9,8 @@ ATargetCube::ATargetCube()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+	bIsImportantTarget = false;
+	bIsHitOnce = false;
 }
 
 // Called when the game starts or when spawned
@@ -41,7 +43,7 @@ void ATargetCube::OnHit(float ScaleFactor)
 
 bool ATargetCube::GetIsImportantTarget()
 {
-	return false;
+	return bIsImportantTarget;
 }
 
 void ATargetCube::SetIsImportantTarget(bool NewValue)

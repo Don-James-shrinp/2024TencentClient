@@ -49,7 +49,20 @@ void AFirstPersonGameProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* Oth
 			if (myGameMode && currentGameState)
 			{
 				int32 currentScore = currentGameState->GetTotalScore();
-				currentGameState->SetTotalScore(currentScore + myGameMode->GetPointsPerHit());
+				if (targetCube->GetIsImportantTarget())
+				{
+					GEngine->AddOnScreenDebugMessage(
+						-1,
+						10.0f,
+						FColor::Yellow,
+						TEXT("Get Bonus!!!")
+					);
+					currentGameState->SetTotalScore(currentScore + myGameMode->GetPointsPerHit() * myGameMode->GetBonusMagnification());
+				}
+				else
+				{
+					currentGameState->SetTotalScore(currentScore + myGameMode->GetPointsPerHit());
+				}
 				targetCube->OnHit(myGameMode->GetScaleFactor());
 			}
 		}

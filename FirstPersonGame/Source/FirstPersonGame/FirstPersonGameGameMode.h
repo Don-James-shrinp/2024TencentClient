@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
+#include "TargetCube.h"
 #include "FirstPersonGameGameMode.generated.h"
 
 UCLASS(minimalapi)
@@ -16,6 +17,8 @@ public:
 	int32 GetPointsPerHit();
 
 	float GetScaleFactor();
+
+	int32 GetBonusMagnification();
 
 protected:
 	virtual void BeginPlay() override;
@@ -38,11 +41,13 @@ private:
 	float ScaleFactor;  //  被击中后的缩放比例y
 
 	UPROPERTY(EditAnywhere, Category = "Game Rules")
-	TArray<AActor*> TargetCubes;  //  存储场景中的方块
+	TArray<ATargetCube*> cubes;
 
 	bool isEnd;  //  是否结束游戏
 
 	void EndGame();
+
+	void InitializeItems();  //  初始化特殊方块
 
 };
 

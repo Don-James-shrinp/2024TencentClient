@@ -10,6 +10,8 @@
 
 [课程作业1](./Assignments/Assignment1.md)
 
+[课程作业2](./Assignments/Assignment2.md)
+
 ## 问题及解决方案
 
 [TroubleShoot](https://github.com/Don-James-shrinp/2024TencentClient/tree/main/Notes/TroubleShoot.md)
