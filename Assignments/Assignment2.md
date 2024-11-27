@@ -195,4 +195,5 @@
 
 #### 演示视频
 
-<video src="../Videos/Lesson2-Demo.mkv">
+[演示视频](https://www.bilibili.com/video/BV1tqBdYzEhU/?spm_id_from=333.1387.homepage.video_card.click&vd_source=f28fc22dbf394cb6fdd5be80549f3a11)
+
