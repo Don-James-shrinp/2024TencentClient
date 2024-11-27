@@ -184,3 +184,15 @@
 - 效果如下
 
   <img src="../Images/Assignment2/bonus.png">
+
+### 最终效果
+
+#### 可配置参数
+
+- 配置参数可以在GameMode中进行配置
+
+  <img src="../Images/Assignment2/GameConfig.png">
+
+#### 演示视频
+
+<video src="../Videos/Lesson2-Demo.mkv">
