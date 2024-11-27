@@ -110,3 +110,77 @@
 
 ### 随机初始化特殊方块实现
 
+- 通过查找场景中`ATarget`类的对象，来获取所有的TargetCube对象
+
+- 调用TargetCube暴露的设置特殊性的接口来随机设置方块的特殊性
+
+  ```c++
+  void AFirstPersonGameGameMode::InitializeItems()
+  {
+  	TArray<AActor*> FoundActors;
+  	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ATargetCube::StaticClass(), FoundActors);
+  	if (FoundActors.Num() == 0)
+  	{
+  		UE_LOG(LogTemp, Error, TEXT("No TargetCube Found in Scene"));
+  		return;
+  	}
+  	Algo::RandomShuffle(FoundActors);
+  	uint32 NumToSelect = FMath::Min(FoundActors.Num(), ImportantTargetCount);
+  	for (uint32 index = 0; index < NumToSelect; ++index)
+  	{
+  		ATargetCube* targetCube = Cast<ATargetCube>(FoundActors[index]);
+  		if (targetCube)
+  		{
+  			targetCube->SetIsImportantTarget(true);
+  			UE_LOG(LogTemp, Log, TEXT("Marked TargetCube %s as important."), *targetCube->GetName());
+  		}
+  		else
+  		{
+  			UE_LOG(LogTemp, Warning, TEXT("Failed to cast actor to ATargetCube."));
+  		}
+  	}
+  }
+  ```
+
+- 击中特殊方块后，在屏幕上给出反馈，并在记分时乘上倍率
+
+  ```c++
+  void AFirstPersonGameProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
+  {
+  	// Only add impulse and destroy projectile if we hit a physics
+  	if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr) && OtherComp->IsSimulatingPhysics())
+  	{
+  		OtherComp->AddImpulseAtLocation(GetVelocity() * 100.0f, GetActorLocation());
+  		ATargetCube* targetCube = Cast<ATargetCube>(OtherActor);
+  		if (targetCube)
+  		{
+  			auto currentGameState = GetWorld()->GetGameState<AFirstGameStateBase>();
+  			auto myGameMode = Cast<AFirstPersonGameGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
+  			if (myGameMode && currentGameState)
+  			{
+  				int32 currentScore = currentGameState->GetTotalScore();
+  				if (targetCube->GetIsImportantTarget())
+  				{
+  					GEngine->AddOnScreenDebugMessage(
+  						-1,
+  						10.0f,
+  						FColor::Yellow,
+  						TEXT("Get Bonus!!!")
+  					);
+  					currentGameState->SetTotalScore(currentScore + myGameMode->GetPointsPerHit() * myGameMode->GetBonusMagnification());
+  				}
+  				else
+  				{
+  					currentGameState->SetTotalScore(currentScore + myGameMode->GetPointsPerHit());
+  				}
+  				targetCube->OnHit(myGameMode->GetScaleFactor());
+  			}
+  		}
+  		Destroy();
+  	}
+  }
+  ```
+
+- 效果如下
+
+  <img src="../Images/Assignment2/bonus.png">

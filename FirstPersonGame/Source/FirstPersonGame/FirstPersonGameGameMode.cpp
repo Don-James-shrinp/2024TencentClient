@@ -44,7 +44,8 @@ void AFirstPersonGameGameMode::BeginPlay()
 {
 	Super::BeginPlay();
 	//GetWorldTimerManager().SetTimerForNextTick(this, &AFirstPersonGameGameMode::EndGame);  // 为下一帧注册该函数
-	
+	// 初始化场景中的物体
+	InitializeItems();
 }
 
 void AFirstPersonGameGameMode::Tick(float DeltaTime)

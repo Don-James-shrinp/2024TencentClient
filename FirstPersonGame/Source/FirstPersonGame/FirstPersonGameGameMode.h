@@ -40,9 +40,6 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Game Rules")
 	float ScaleFactor;  //  被击中后的缩放比例y
 
-	UPROPERTY(EditAnywhere, Category = "Game Rules")
-	TArray<ATargetCube*> cubes;
-
 	bool isEnd;  //  是否结束游戏
 
 	void EndGame();
