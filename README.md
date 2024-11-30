@@ -6,6 +6,8 @@
 
 [课程2—游戏模式](./Notes/Tencent2024-lesson2.md)
 
+[课程3-UE5的C++ 代码规范](./Notes/Tencent2024-lesson3.md)
+
 ## 课程作业
 
 [课程作业1](./Assignments/Assignment1.md)
