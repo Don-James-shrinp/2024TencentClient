@@ -127,4 +127,4 @@
 #### UENUM
 
 - 尽量用枚举类，避免冲突，`enum class`
-- 通过`:type`来表示enum的类型
+- 通过`enum class name:type`来表示enum的数据类型
