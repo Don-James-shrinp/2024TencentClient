@@ -4,11 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "FirstPersonGame/FirstPersonGamePlayerController.h"
 #include "FirstPersonGameProjectile.generated.h"
-
 class USphereComponent;
 class UProjectileMovementComponent;
-
+class UShootingUserWidget;
 UCLASS(config=Game)
 class AFirstPersonGameProjectile : public AActor
 {
@@ -34,6 +34,9 @@ public:
 	/** Returns ProjectileMovement subobject **/
 	UProjectileMovementComponent* GetProjectileMovement() const { return ProjectileMovement; }
 private:
-	FTimerHandle TestHandle;
+	UShootingUserWidget* ShootingWidget;  //  射击UMG界面
+	AFirstPersonGamePlayerController* MyPlayerController;  //  玩家控制器
+protected:
+	virtual void BeginPlay() override;
 };
 

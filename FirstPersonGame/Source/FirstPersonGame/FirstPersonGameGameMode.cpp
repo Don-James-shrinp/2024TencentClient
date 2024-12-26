@@ -8,6 +8,7 @@
 #include "FirstGameStateBase.h"
 #include "TargetCube.h"
 #include "Algo/RandomShuffle.h"
+#include "ShootingUserWidget.h"
 
 AFirstPersonGameGameMode::AFirstPersonGameGameMode()
 	: Super()
@@ -46,6 +47,7 @@ void AFirstPersonGameGameMode::BeginPlay()
 	//GetWorldTimerManager().SetTimerForNextTick(this, &AFirstPersonGameGameMode::EndGame);  // 为下一帧注册该函数
 	// 初始化场景中的物体
 	InitializeItems();
+	MyController = Cast<AFirstPersonGamePlayerController>(GetWorld()->GetFirstPlayerController());
 }
 
 void AFirstPersonGameGameMode::Tick(float DeltaTime)
@@ -55,6 +57,7 @@ void AFirstPersonGameGameMode::Tick(float DeltaTime)
 	if (currentGameState)
 	{
 		float currentTime = currentGameState->GetTimePassed();
+		MyController->ShootingUserWidget->ReceiveDamage(DeltaTime / GameDuration);
 		currentGameState->SetTimePassed(currentTime + DeltaTime);
 		if (currentGameState->GetTimePassed() >= GameDuration && !isEnd)
 		{

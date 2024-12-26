@@ -7,7 +7,7 @@
 #include "FirstPersonGamePlayerController.generated.h"
 
 class UInputMappingContext;
-
+class UShootingUserWidget;
 /**
  *
  */
@@ -21,6 +21,9 @@ protected:
 	/** Input Mapping Context to be used for player input */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
 	UInputMappingContext* InputMappingContext;
+public:
+	UPROPERTY(BlueprintReadWrite, Category = "UI")
+	UShootingUserWidget* ShootingUserWidget;  //  射击界面的引用
 
 	// Begin Actor interface
 protected:

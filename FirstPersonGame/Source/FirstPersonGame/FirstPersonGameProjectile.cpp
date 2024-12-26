@@ -7,6 +7,9 @@
 #include "TargetCube.h"
 #include "FirstPersonGameGameMode.h"
 #include <Kismet/GameplayStatics.h>
+#include "GameFramework/PlayerController.h"
+#include "ShootingUserWidget.h"
+
 
 AFirstPersonGameProjectile::AFirstPersonGameProjectile() 
 {
@@ -33,6 +36,7 @@ AFirstPersonGameProjectile::AFirstPersonGameProjectile()
 
 	// Die after 3 seconds by default
 	InitialLifeSpan = 3.0f;
+
 }
 
 void AFirstPersonGameProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
@@ -44,6 +48,7 @@ void AFirstPersonGameProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* Oth
 		ATargetCube* targetCube = Cast<ATargetCube>(OtherActor);
 		if (targetCube)
 		{
+			MyPlayerController->ShootingUserWidget->PlayHitFeedback();
 			auto currentGameState = GetWorld()->GetGameState<AFirstGameStateBase>();
 			auto myGameMode = Cast<AFirstPersonGameGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
 			if (myGameMode && currentGameState)
@@ -67,5 +72,15 @@ void AFirstPersonGameProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* Oth
 			}
 		}
 		Destroy();
+	}
+}
+
+void AFirstPersonGameProjectile::BeginPlay()
+{
+	Super::BeginPlay();
+	MyPlayerController = Cast<AFirstPersonGamePlayerController>(UGameplayStatics::GetPlayerController(GetWorld(), 0));
+	if (!MyPlayerController)
+	{
+		UE_LOG(LogTemp, Error, TEXT("Get Player Controler Failed!"));
 	}
 }

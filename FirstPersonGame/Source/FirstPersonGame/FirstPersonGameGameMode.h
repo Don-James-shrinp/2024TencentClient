@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
 #include "TargetCube.h"
+#include "FirstPersonGame/FirstPersonGamePlayerController.h"
 #include "FirstPersonGameGameMode.generated.h"
 
 UCLASS(minimalapi)
@@ -46,6 +47,7 @@ private:
 
 	void InitializeItems();  //  初始化特殊方块
 
+	AFirstPersonGamePlayerController* MyController;
 };
 
 

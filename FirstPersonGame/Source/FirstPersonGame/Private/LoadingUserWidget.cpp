@@ -48,11 +48,11 @@ void ULoadingUserWidget::UpdateProgressBar()
 	{
 		Progress += ProgressPerTick;
 		LoadingProgress->SetPercent(FMath::Clamp(Progress, 0.0f, 1.0f)); // 确保进度在0到1之间
-	}
-	if (LoadingProgress->GetPercent() == 1.0f)  //  进度条加载完
-	{
-		GetWorld()->GetTimerManager().ClearTimer(UpdateProgressBarTimer);
-		GetWorld()->GetTimerManager().ClearTimer(UpdateTextTimer);
-		UGameplayStatics::OpenLevel(GetWorld(), TEXT("FirstPersonMap"));
+		if (LoadingProgress->GetPercent() == 1.0f)  //  进度条加载完
+		{
+			GetWorld()->GetTimerManager().ClearTimer(UpdateProgressBarTimer);
+			GetWorld()->GetTimerManager().ClearTimer(UpdateTextTimer);
+			UGameplayStatics::OpenLevel(GetWorld(), TEXT("FirstPersonMap"));
+		}
 	}
 }

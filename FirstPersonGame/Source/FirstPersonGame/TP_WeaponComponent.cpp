@@ -12,6 +12,8 @@
 #include "Animation/AnimInstance.h"
 #include "Engine/LocalPlayer.h"
 #include "Engine/World.h"
+#include "ShootingUserWidget.h"
+#include "FirstPersonGame/FirstPersonGamePlayerController.h"
 
 // Sets default values for this component's properties
 UTP_WeaponComponent::UTP_WeaponComponent()
@@ -31,9 +33,16 @@ void UTP_WeaponComponent::Fire()
 	// Try and fire a projectile
 	if (ProjectileClass != nullptr)
 	{
+		
 		UWorld* const World = GetWorld();
 		if (World != nullptr)
 		{
+			AFirstPersonGamePlayerController* MyController = Cast<AFirstPersonGamePlayerController>(Character->GetController());
+			if (MyController->ShootingUserWidget->isAmmoEmpty())  //  子弹为空，则无法射出子弹
+			{
+				return;
+			}
+			MyController->ShootingUserWidget->ShootAmmo();
 			APlayerController* PlayerController = Cast<APlayerController>(Character->GetController());
 			const FRotator SpawnRotation = PlayerController->PlayerCameraManager->GetCameraRotation();
 			// MuzzleOffset is in camera space, so transform it to world space before offsetting from the character location to find the final muzzle position
@@ -69,7 +78,6 @@ void UTP_WeaponComponent::Fire()
 bool UTP_WeaponComponent::AttachWeapon(AFirstPersonGameCharacter* TargetCharacter)
 {
 	Character = TargetCharacter;
-
 	// Check that the character is valid, and has no weapon component yet
 	if (Character == nullptr || Character->GetInstanceComponents().FindItemByClass<UTP_WeaponComponent>())
 	{
