@@ -34,7 +34,6 @@ public:
 	/** Returns ProjectileMovement subobject **/
 	UProjectileMovementComponent* GetProjectileMovement() const { return ProjectileMovement; }
 private:
-	UShootingUserWidget* ShootingWidget;  //  射击UMG界面
 	AFirstPersonGamePlayerController* MyPlayerController;  //  玩家控制器
 protected:
 	virtual void BeginPlay() override;

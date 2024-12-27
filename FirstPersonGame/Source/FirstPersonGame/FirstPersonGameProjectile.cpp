@@ -48,7 +48,7 @@ void AFirstPersonGameProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* Oth
 		ATargetCube* targetCube = Cast<ATargetCube>(OtherActor);
 		if (targetCube)
 		{
-			MyPlayerController->ShootingUserWidget->PlayHitFeedback();
+			MyPlayerController->ShootingUserWidget->PlayHitFeedback();  //  通过Controller调用UMG动画
 			auto currentGameState = GetWorld()->GetGameState<AFirstGameStateBase>();
 			auto myGameMode = Cast<AFirstPersonGameGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
 			if (myGameMode && currentGameState)

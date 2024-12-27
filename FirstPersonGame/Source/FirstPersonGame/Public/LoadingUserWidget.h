@@ -19,14 +19,10 @@ class FIRSTPERSONGAME_API ULoadingUserWidget : public UUserWidget
 protected:
 	virtual void NativeConstruct() override;
 
+	
 public:
 	// Update the loading text (no parameters needed)
 	void UpdateLoadingText();
-
-	void UpdateProgressBar();
-
-	UPROPERTY(EditAnywhere)
-	float ProgressPerTick;
 
 	UPROPERTY(meta = (BindWidget))
 	UTextBlock* LoadingText;
@@ -34,9 +30,13 @@ public:
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
 	UProgressBar* LoadingProgress;
 
+	UPROPERTY(meta=(BindWidgetAnim), Transient)
+	UWidgetAnimation* LoadingAnimation;
 private:
 	int8 DotCounts;
 	float Progress;
 	FTimerHandle UpdateTextTimer;
-	FTimerHandle UpdateProgressBarTimer;
+
+	UFUNCTION()
+	void OnLoadingAnimationFinished();
 };

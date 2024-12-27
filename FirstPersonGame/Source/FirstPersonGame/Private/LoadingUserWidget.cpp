@@ -1,10 +1,13 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "LoadingUserWidget.h"
-#include "Components/ProgressBar.h"
+#include "CoreMinimal.h"
+#include "Blueprint/UserWidget.h"
 #include "Components/TextBlock.h"
+#include "Components/ProgressBar.h"
 #include "Kismet/GameplayStatics.h"
+#include "LoadingUserWidget.h"
+#include "Animation/WidgetAnimation.h"
 // In ULoadingUserWidget.cpp
 
 void ULoadingUserWidget::NativeConstruct()
@@ -18,13 +21,23 @@ void ULoadingUserWidget::NativeConstruct()
 		GetWorld()->GetTimerManager().SetTimer(UpdateTextTimer, this, &ULoadingUserWidget::UpdateLoadingText, 0.5f, true, 1.0f); // Timer triggers without parameters
 	}
 
-	if (LoadingProgress)
+	if (LoadingAnimation)
 	{
-		Progress = 0.0f;
-		LoadingProgress->SetPercent(0.0f);
-		GetWorld()->GetTimerManager().SetTimer(UpdateProgressBarTimer, this, &ULoadingUserWidget::UpdateProgressBar, 0.5f, true, 1.0f);
+		FWidgetAnimationDynamicEvent AnimationEvent;
+		AnimationEvent.BindDynamic(this, &ULoadingUserWidget::OnLoadingAnimationFinished);
+		this->BindToAnimationFinished(LoadingAnimation, AnimationEvent);  //  绑定动画播放完后要调用的回调函数
+		PlayAnimation(LoadingAnimation);
 	}
-	ProgressPerTick = 0.05f;
+	else
+	{
+		UE_LOG(LogTemp, Error, TEXT("Cannot Load Loading Animation"));
+	}
+}
+
+void ULoadingUserWidget::OnLoadingAnimationFinished()
+{
+	GetWorld()->GetTimerManager().ClearTimer(UpdateTextTimer);
+	UGameplayStatics::OpenLevel(GetWorld(), TEXT("FirstPersonMap"));
 }
 
 void ULoadingUserWidget::UpdateLoadingText()  //  函数不能有参数？估计是可以的，类似std::bind，传入函数名和参数名以构造此函数调用
@@ -38,21 +51,5 @@ void ULoadingUserWidget::UpdateLoadingText()  //  函数不能有参数？估计是可以的，
 	if (LoadingText)
 	{
 		LoadingText->SetText(FText::FromString(text));
-	}
-}
-
-
-void ULoadingUserWidget::UpdateProgressBar()
-{
-	if (LoadingProgress)
-	{
-		Progress += ProgressPerTick;
-		LoadingProgress->SetPercent(FMath::Clamp(Progress, 0.0f, 1.0f)); // 确保进度在0到1之间
-		if (LoadingProgress->GetPercent() == 1.0f)  //  进度条加载完
-		{
-			GetWorld()->GetTimerManager().ClearTimer(UpdateProgressBarTimer);
-			GetWorld()->GetTimerManager().ClearTimer(UpdateTextTimer);
-			UGameplayStatics::OpenLevel(GetWorld(), TEXT("FirstPersonMap"));
-		}
 	}
 }
